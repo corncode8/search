@@ -15,4 +15,8 @@ public class KeywordRecoderImpl implements KeywordRecoder {
         repository.save(keyword, location);
     }
 
+    @Override
+    public void redisRecord(String keyword, String location) {
+
+    }
 }
