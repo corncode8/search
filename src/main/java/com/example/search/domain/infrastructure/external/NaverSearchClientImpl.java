@@ -67,7 +67,7 @@ public class NaverSearchClientImpl implements NaverSearchClient{
         }
     }
 
-    private double parseOrZero(String value) {
+    private Double parseOrZero(String value) {
         try {
             return Double.parseDouble(value);
         } catch (Exception e) {
