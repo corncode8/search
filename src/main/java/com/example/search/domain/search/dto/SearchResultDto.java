@@ -14,5 +14,4 @@ public class SearchResultDto {
     private final double latitude;
     private final double longitude;
 
-
 }

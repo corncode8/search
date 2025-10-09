@@ -1,5 +1,6 @@
-package com.example.search.api.search.service;
+package com.example.search.api.search.service.impl;
 
+import com.example.search.api.search.service.SearchClient;
 import com.example.search.domain.infrastructure.external.KakaoSearchClient;
 import com.example.search.domain.infrastructure.external.NaverSearchClient;
 import com.example.search.domain.search.dto.SearchResultDto;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,12 +22,13 @@ public class SearchClientImpl implements SearchClient {
 
     @Override
     public List<SearchResultDto> search(String keyword, String location) {
+        List<SearchResultDto> result = new ArrayList<>();
 
         // 1) Naver
         try {
             List<SearchResultDto> naver = naverSearchClient.search(keyword, location);
             if (naver != null && !naver.isEmpty()) {
-                return naver;
+                result.addAll(naver);
             }
         } catch (Exception e) {
             log.warn("Naver Client 실패 : {}", e.getMessage());
@@ -36,14 +39,15 @@ public class SearchClientImpl implements SearchClient {
         try {
             List<SearchResultDto> kakao = kakaoSearchClient.search(keyword);
             if (kakao != null && !kakao.isEmpty()) {
-                return kakao;
+                result.addAll(kakao);
             } else {
                 return Collections.emptyList();
             }
         } catch (Exception e) {
             log.warn("Kakao Client 실패 : {}", e.getMessage());
-            return Collections.emptyList();
         }
+
+        return result;
 
     }
 

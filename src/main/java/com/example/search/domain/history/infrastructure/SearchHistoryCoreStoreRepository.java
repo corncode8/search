@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class SearchHistoryCoreStoryRepository implements SearchHistoryStoreRepository {
+public class SearchHistoryCoreStoreRepository implements SearchHistoryStoreRepository {
 
     private final SearchHistoryJpaRepository searchHistoryJpaRepository;
 

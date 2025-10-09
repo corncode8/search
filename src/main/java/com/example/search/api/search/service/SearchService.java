@@ -1,23 +1,27 @@
 package com.example.search.api.search.service;
 
 import com.example.search.api.response.PageResponse;
+import com.example.search.api.response.PopularKeywordsResponse;
 import com.example.search.domain.search.dto.SearchResultDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class SearchService {
 
     private final SearchClientManager clienclientManager;
-    private final KeywordRecoder keywordRecoder;
+    private final KeywordStore keywordStore;
+    private final RedisKeywordManager redisManager;
 
     public PageResponse<SearchResultDto> search(String keyword, String location) {
         List<SearchResultDto> items = clienclientManager.search(keyword, location);
 
-        keywordRecoder.dbRecord(keyword, location);
+        keywordStore.save(keyword, location);
+        redisManager.saveRedis(keyword, location);
 
         return PageResponse.<SearchResultDto>builder()
                 .items(items)
@@ -29,6 +33,13 @@ public class SearchService {
                 .hasNextPage(false)
                 .build();
 
+    }
 
+    public PopularKeywordsResponse popularKeywords(String location) {
+        Map<String, Integer> result = redisManager.selectPopularKeywords(location);
+
+        return PopularKeywordsResponse.builder()
+                .keywordList(result)
+                .build();
     }
 }

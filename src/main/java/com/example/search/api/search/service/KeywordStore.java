@@ -4,19 +4,17 @@ import com.example.search.domain.history.repository.SearchHistoryStoreRepository
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 @Service
 @RequiredArgsConstructor
-public class KeywordRecoderImpl implements KeywordRecoder {
+public class KeywordStore {
 
     private final SearchHistoryStoreRepository repository;
 
-    @Override
-    public void dbRecord(String keyword, String location) {
+
+    public void save(String keyword, String location) {
         repository.save(keyword, location);
     }
 
-    @Override
-    public void redisRecord(String keyword, String location) {
 
-    }
 }
