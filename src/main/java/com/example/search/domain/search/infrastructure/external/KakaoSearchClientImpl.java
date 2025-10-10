@@ -1,6 +1,6 @@
-package com.example.search.domain.infrastructure.external;
+package com.example.search.domain.search.infrastructure.external;
 
-import com.example.search.domain.infrastructure.external.dto.KakaoSearchResponse;
+import com.example.search.domain.search.infrastructure.external.dto.KakaoSearchResponse;
 import com.example.search.domain.search.dto.SearchResultDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

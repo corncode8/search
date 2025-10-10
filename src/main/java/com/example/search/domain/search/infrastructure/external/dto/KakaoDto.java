@@ -1,4 +1,4 @@
-package com.example.search.domain.infrastructure.external.dto;
+package com.example.search.domain.search.infrastructure.external.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

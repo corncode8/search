@@ -1,7 +1,7 @@
-package com.example.search.api.search.service;
+package com.example.search.api.application;
 
-import com.example.search.api.response.PageResponse;
-import com.example.search.api.response.PopularKeywordsResponse;
+import com.example.search.api.data.response.PageResponse;
+import com.example.search.api.data.response.PopularKeywordsResponse;
 import com.example.search.domain.search.dto.SearchResultDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,5 @@
-package com.example.search.domain.infrastructure.cache;
+package com.example.search.api.application;
 
-import com.example.search.api.search.service.RedisKeywordManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -16,11 +15,10 @@ import java.util.Set;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class RedisKeywordComponent implements RedisKeywordManager {
+public class RedisKeywordManager {
 
     private final StringRedisTemplate redisTemplate;
 
-    @Override
     public Map<String, Integer> selectPopularKeywords(String location) {
         String todayKey = "popular_keywords:" + LocalDate.now() + ":" + location;
         String yesterdayKey = "popular_keywords:" + LocalDate.now().minusDays(1) + ":" + location;
@@ -41,7 +39,6 @@ public class RedisKeywordComponent implements RedisKeywordManager {
         return keywordList;
     }
 
-    @Override
     public void saveRedis(String keyword, String location) {
         String key = "popular_keywards : " + LocalDate.now() + ":" + location;
 

@@ -1,8 +1,7 @@
-package com.example.search.api.search.service.impl;
+package com.example.search.api.application;
 
-import com.example.search.api.search.service.SearchClient;
-import com.example.search.domain.infrastructure.external.KakaoSearchClient;
-import com.example.search.domain.infrastructure.external.NaverSearchClient;
+import com.example.search.domain.search.infrastructure.external.KakaoSearchClient;
+import com.example.search.domain.search.infrastructure.external.NaverSearchClient;
 import com.example.search.domain.search.dto.SearchResultDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,12 +14,11 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SearchClientImpl implements SearchClient {
+public class SearchClient {
 
     private final KakaoSearchClient kakaoSearchClient;
     private final NaverSearchClient naverSearchClient;
 
-    @Override
     public List<SearchResultDto> search(String keyword, String location) {
         List<SearchResultDto> result = new ArrayList<>();
 

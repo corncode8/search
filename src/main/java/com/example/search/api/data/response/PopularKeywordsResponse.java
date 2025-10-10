@@ -1,4 +1,4 @@
-package com.example.search.api.response;
+package com.example.search.api.data.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.example.search.api.search.service;
+package com.example.search.api.application;
 
 import com.example.search.domain.search.dto.SearchResultDto;
 import lombok.RequiredArgsConstructor;

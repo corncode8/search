@@ -1,4 +1,4 @@
-package com.example.search.domain.infrastructure.configuration;
+package com.example.search.config;
 
 import lombok.extern.slf4j.Slf4j;
 

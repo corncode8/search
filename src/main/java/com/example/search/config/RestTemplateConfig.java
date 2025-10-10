@@ -1,4 +1,4 @@
-package com.example.search.domain.infrastructure.configuration;
+package com.example.search.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

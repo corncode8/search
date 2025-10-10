@@ -1,4 +1,4 @@
-package com.example.search.domain.infrastructure.external;
+package com.example.search.domain.search.infrastructure.external;
 
 
 import com.example.search.domain.search.dto.SearchResultDto;
