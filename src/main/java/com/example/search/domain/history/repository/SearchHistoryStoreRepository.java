@@ -1,6 +1,8 @@
 package com.example.search.domain.history.repository;
 
+import com.example.search.domain.history.entity.SearchHistory;
+
 public interface SearchHistoryStoreRepository {
 
-    void save (String keyword, String location);
+    SearchHistory save (String keyword, String location);
 }

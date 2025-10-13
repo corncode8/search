@@ -30,8 +30,8 @@ public class SearchController {
     }
 
     @GetMapping("/popular")
-    public SearchResponse popularKeywords(@RequestParam String location) {
-        PopularKeywordsResponse popularKeywords = searchService.popularKeywords(location);
+    public SearchResponse popularKeywords() {
+        PopularKeywordsResponse popularKeywords = searchService.popularKeywords();
 
         return SearchResponse.builder()
                 .status(200)

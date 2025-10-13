@@ -30,7 +30,6 @@ public class SearchClient {
             }
         } catch (Exception e) {
             log.warn("Naver Client 실패 : {}", e.getMessage());
-
         }
 
         // 2) Kakao (fallback)

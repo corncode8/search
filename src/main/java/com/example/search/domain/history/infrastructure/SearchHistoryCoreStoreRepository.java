@@ -12,8 +12,8 @@ public class SearchHistoryCoreStoreRepository implements SearchHistoryStoreRepos
     private final SearchHistoryJpaRepository searchHistoryJpaRepository;
 
     @Override
-    public void save(String keyword, String location) {
-        searchHistoryJpaRepository.save(
+    public SearchHistory save(String keyword, String location) {
+        return searchHistoryJpaRepository.save(
                 SearchHistory.builder()
                         .keyword(keyword)
                         .location(location)

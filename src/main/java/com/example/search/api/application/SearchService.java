@@ -35,8 +35,8 @@ public class SearchService {
 
     }
 
-    public PopularKeywordsResponse popularKeywords(String location) {
-        Map<String, Integer> result = redisManager.selectPopularKeywords(location);
+    public PopularKeywordsResponse popularKeywords() {
+        Map<String, Integer> result = redisManager.selectPopularKeywords();
 
         return PopularKeywordsResponse.builder()
                 .keywordList(result)

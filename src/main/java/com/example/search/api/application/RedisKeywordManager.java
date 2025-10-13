@@ -19,12 +19,15 @@ public class RedisKeywordManager {
 
     private final StringRedisTemplate redisTemplate;
 
-    public Map<String, Integer> selectPopularKeywords(String location) {
-        String todayKey = "popular_keywords:" + LocalDate.now() + ":" + location;
-        String yesterdayKey = "popular_keywords:" + LocalDate.now().minusDays(1) + ":" + location;
+    private static final String DAILY_KEY = "popular_keywords:";
+    private static final Duration KEY_TTL = Duration.ofDays(2);
 
-        Long today = redisTemplate.opsForZSet().size(todayKey);
-        String targetKey = (today != null && today > 100) ? todayKey : yesterdayKey;
+    public Map<String, Integer> selectPopularKeywords() {
+        String todayKey = DAILY_KEY + LocalDate.now();
+        String yesterdayKey = DAILY_KEY + LocalDate.now().minusDays(1);
+
+        Long todaySize = redisTemplate.opsForZSet().size(todayKey);
+        String targetKey = (todaySize != null && todaySize > 100) ? todayKey : yesterdayKey;
 
         Set<ZSetOperations.TypedTuple<String>> topKeywords =
                 redisTemplate.opsForZSet().reverseRangeWithScores(targetKey, 0, 9);
@@ -32,7 +35,9 @@ public class RedisKeywordManager {
         Map<String, Integer> keywordList = new LinkedHashMap<>();
         if (topKeywords != null) {
             for (ZSetOperations.TypedTuple<String> tuple : topKeywords) {
-                keywordList.put(tuple.getValue(), tuple.getScore().intValue());
+                if (tuple.getValue() != null && tuple.getScore() != null) {
+                    keywordList.put(tuple.getValue(), tuple.getScore().intValue());
+                }
             }
         }
 
@@ -40,11 +45,13 @@ public class RedisKeywordManager {
     }
 
     public void saveRedis(String keyword, String location) {
-        String key = "popular_keywards : " + LocalDate.now() + ":" + location;
+        String baseKey = DAILY_KEY + LocalDate.now();
+        String locationKey = baseKey + ":" + location;
 
-        redisTemplate.opsForZSet().incrementScore(key, keyword, 1.0);
+        redisTemplate.opsForZSet().incrementScore(baseKey, keyword, 1.0);
+        redisTemplate.opsForZSet().incrementScore(locationKey, keyword, 1.0);
 
-        // 키 만료 2일
-        redisTemplate.expire(key, Duration.ofDays(2));
+        redisTemplate.expire(baseKey, KEY_TTL);
+        redisTemplate.expire(locationKey, KEY_TTL);
     }
 }
