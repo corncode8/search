@@ -8,17 +8,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class KakaoDto {
 
-    @JsonProperty("place_name")
-    private String placeName;
-
     @JsonProperty("address_name")
-    private String addressName;
+    private String addressName;     // 서울 서초구 잠원동 12-21
 
-    @JsonProperty("road_address_name")
-    private String roadAddressName;
+    @JsonProperty("place_name")
+    private String palceName;       // 꿉당 신사점
 
     @JsonProperty("category_name")
-    private String categoryName;
+    private String categoryName;    // 음식점 > 한식 > 육류,고기
+
+    @JsonProperty("category_group_name")
+    private String category;        // 음식점
+
+    @JsonProperty("road_address_name")
+    private String roadAddressName; // 서울 서초구 강남대로 615
 
     private String x; // longitude
     private String y; // latitude

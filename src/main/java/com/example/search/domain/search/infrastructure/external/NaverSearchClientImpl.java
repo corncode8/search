@@ -3,7 +3,6 @@ package com.example.search.domain.search.infrastructure.external;
 import com.example.search.domain.search.infrastructure.external.dto.NaverDto;
 import com.example.search.domain.search.infrastructure.external.dto.NaverSearchResponse;
 import com.example.search.domain.search.dto.SearchResultDto;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -15,19 +14,24 @@ import java.util.List;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class NaverSearchClientImpl implements NaverSearchClient{
 
     private final RestTemplate restTemplate;
+    private final String clientId;
+    private final String clientSecret;
+    private final String searchUrl;
 
-    @Value("${naver.api.client-id}")
-    String clientId;
-
-    @Value("${naver.api.client-secret}")
-    String clientSecret;
-
-    @Value("${naver.api.search-url}")
-    String searchUrl;
+    public NaverSearchClientImpl(
+            RestTemplate restTemplate,
+            @Value("${naver.api.client-id}") String clientId,
+            @Value("${naver.api.client-secret}") String clientSecret,
+            @Value("${naver.api.search-url}") String searchUrl
+    ) {
+        this.restTemplate = restTemplate;
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+        this.searchUrl = searchUrl;
+    }
 
     @Override
     public List<SearchResultDto> search(String keyword, String location) {
@@ -56,8 +60,8 @@ public class NaverSearchClientImpl implements NaverSearchClient{
                             .category(item.getCategory())
                             .address(item.getAddress())
                             .roadAddress(item.getRoadAddress())
-                            .latitude(parseOrZero(item.getY()))
-                            .longitude(parseOrZero(item.getX()))
+                            .longitude(parseOrZero(item.getMapx()))
+                            .latitude(parseOrZero(item.getMapy()))
                             .build())
                     .toList();
 

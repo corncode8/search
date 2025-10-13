@@ -2,7 +2,6 @@ package com.example.search.domain.search.infrastructure.external;
 
 import com.example.search.domain.search.infrastructure.external.dto.KakaoSearchResponse;
 import com.example.search.domain.search.dto.SearchResultDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -12,13 +11,19 @@ import java.util.List;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class KakaoSearchClientImpl implements KakaoSearchClient{
 
     private final RestClient.Builder restClientBuilder;
 
-    @Value("${kakao.api.key}")
-    private String kakaoApiKey;
+    private final String kakaoApiKey;
+
+    public KakaoSearchClientImpl(
+            RestClient.Builder restClientBuilder,
+            @Value("${kakao.api.key}") String kakaoApiKey
+    ) {
+        this.restClientBuilder = restClientBuilder;
+        this.kakaoApiKey = kakaoApiKey;
+    }
 
     @Override
     public List<SearchResultDto> search(String keyword) {
@@ -42,10 +47,10 @@ public class KakaoSearchClientImpl implements KakaoSearchClient{
         if (response == null || response.getDocuments() == null) return List.of();
         return response.getDocuments().stream()
                 .map(doc -> SearchResultDto.builder()
-                        .title(doc.getPlaceName())
+                        .title(doc.getPalceName())
                         .address(doc.getAddressName())
                         .roadAddress(doc.getRoadAddressName())
-                        .category(doc.getCategoryName())
+                        .category(doc.getCategory())
                         .latitude(Double.parseDouble(doc.getY()))
                         .longitude(Double.parseDouble(doc.getX()))
                         .build())
