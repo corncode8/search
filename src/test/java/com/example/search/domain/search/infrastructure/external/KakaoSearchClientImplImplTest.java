@@ -16,7 +16,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 
 @Slf4j
-class KakaoSearchClientImplTest {
+class KakaoSearchClientImplImplTest {
 
     private static MockWebServer mockWebServer;
     private KakaoSearchClientImpl client;

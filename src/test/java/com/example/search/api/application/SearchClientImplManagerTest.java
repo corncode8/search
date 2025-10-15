@@ -16,13 +16,13 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-class SearchClientManagerTest {
+class SearchClientImplManagerTest {
 
     @Mock
-    SearchClient naverClient;
+    SearchClientImpl naverClient;
 
     @Mock
-    SearchClient kakaoClient;
+    SearchClientImpl kakaoClient;
 
     @InjectMocks
     SearchClientManager searchClientManager;

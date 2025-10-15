@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class SearchClientTest {
+class SearchClientImplTest {
 
     @Mock
     KakaoSearchClient kakaoSearchClient;
@@ -26,7 +26,7 @@ class SearchClientTest {
     NaverSearchClient naverSearchClient;
 
     @InjectMocks
-    SearchClient client;
+    SearchClientImpl client;
 
     @Test
     @DisplayName("search 성공 테스트")

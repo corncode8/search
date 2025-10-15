@@ -17,7 +17,7 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @Slf4j
-class NaverSearchClientImplTest {
+class NaverSearchClientImplImplTest {
 
     private static MockWebServer mockWebServer;
     private NaverSearchClientImpl client;

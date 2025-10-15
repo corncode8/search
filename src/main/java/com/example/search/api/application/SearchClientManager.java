@@ -11,10 +11,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SearchClientManager {
 
-    private final List<SearchClient> clients;
+    private final List<SearchClientImpl> clients;
 
     public List<SearchResultDto> search(String keyword, String location) {
-        for (SearchClient client : clients) {
+        for (SearchClientImpl client : clients) {
             try {
                 List<SearchResultDto> result = client.search(keyword, location);
                 if (!result.isEmpty()) {
